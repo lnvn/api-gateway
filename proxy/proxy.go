@@ -13,7 +13,15 @@ func NewProxy(target string) (*httputil.ReverseProxy, error) {
 		return nil, err
 	}
 
-	return httputil.NewSingleHostReverseProxy(url), nil
+	proxy := httputil.NewSingleHostReverseProxy(url)
+
+	// Add error handler to return 500 when backend is unavailable
+	proxy.ErrorHandler = func(w http.ResponseWriter, r *http.Request, err error) {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Backend server unavailable"))
+	}
+
+	return proxy, nil
 }
 
 // ProxyHandler returns a http.HandlerFunc that forwards requests to the proxy.
