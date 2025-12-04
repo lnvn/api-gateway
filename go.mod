@@ -1,3 +1,3 @@
-module api-gateway
+module github.com/lnvn/api-gateway
 
-go 1.22.2
+go 1.23.0
