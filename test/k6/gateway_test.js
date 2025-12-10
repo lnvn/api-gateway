@@ -7,11 +7,11 @@ export const options = {
   scenarios: {
     constant_stress: {
       executor: 'constant-arrival-rate', // Inject requests at a constant rate
-      rate: 1000,                        // Target: 100 iterations (requests) per second
+      rate: 5000,                        // Target: 100 iterations (requests) per second
       timeUnit: '1s',                   // The rate is per 1 second
-      duration: '1m',                   // Run the test for 1 minute
+      duration: '2m',                   // Run the test for 1 minute
       preAllocatedVUs: 200,             // Start with 200 Virtual Users pre-allocated
-      maxVUs: 1000,                     // Allow up to 1000 VUs if needed to maintain the rate
+      maxVUs: 5000,                     // Allow up to 1000 VUs if needed to maintain the rate
     },
   },
 
@@ -30,7 +30,7 @@ export const options = {
 export default function () {
   // Target a simple, unauthenticated endpoint through your API Gateway
   // The sleep(1) is NOW largely ignored because the executor controls the arrival rate.
-  const res = http.get('http://localhost:8080/api/v1/test');
+  const res = http.get('http://apigw.local/api/v1/data-service');
 
   // Perform checks (assertions) on the response
   check(res, {
