@@ -20,7 +20,7 @@ func generateRecords(count int) []Record {
 		records[i] = Record{
 			ID:        i + 1,
 			Timestamp: time.Now(),
-			Data: fmt.Sprintf("Data for record %d: This is some filler data to increase payload size.", i+1),
+			Data:      fmt.Sprintf("Data for record %d: This is some filler data to increase payload size.", i+1),
 		}
 	}
 	return records

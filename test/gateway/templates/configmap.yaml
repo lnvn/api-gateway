@@ -9,11 +9,7 @@ data:
         "routes": [
             {
                 "path": "/api/v1/",
-                "backend_url": "http://localhost:8081"
-            },
-            {
-                "path": "/api/v2/",
-                "backend_url": "http://localhost:8081"
+                "backend_url": "http://data-service:8081"
             }
         ]
     }
