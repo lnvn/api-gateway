@@ -53,6 +53,11 @@ func handleBackend1(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/data-service", handleBackend1)
 
+	http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("ok"))
+	})
+
 	port := ":8081"
 	log.Printf("Starting high-payload backend on port %s", port)
 	log.Fatal(http.ListenAndServe(port, nil))
