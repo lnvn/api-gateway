@@ -6,6 +6,8 @@ import (
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 type Record struct {
@@ -57,6 +59,8 @@ func main() {
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte("ok"))
 	})
+
+	http.Handle("/metrics", promhttp.Handler())
 
 	port := ":8081"
 	log.Printf("Starting high-payload backend on port %s", port)

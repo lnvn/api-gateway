@@ -43,6 +43,7 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 8081
+  metricsPort: 9090
 
 ingress:
   enabled: false
@@ -106,3 +107,9 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+monitoring:
+  # 4. Global toggle to enable the ServiceMonitor resource
+  enabled: true
+  # 5. Label selector used by the Prometheus Operator
+  selectorLabel: prometheus
