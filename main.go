@@ -13,6 +13,8 @@ import (
 	"api-gateway/config"
 	"api-gateway/middleware"
 	"api-gateway/proxy"
+
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func main() {
@@ -39,6 +41,9 @@ func main() {
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte("ok"))
 	})
+
+	// metrics endpoint
+	mux.Handle("/metrics", promhttp.Handler())
 
 	for _, route := range cfg.Routes {
 		// Create a proxy for each route

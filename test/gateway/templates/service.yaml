@@ -11,5 +11,9 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+    - port: {{ .Values.service.metricsPort }}
+      targetPort: http
+      protocol: TCP
+      name: http-metrics
   selector:
     {{- include "helm.selectorLabels" . | nindent 4 }}

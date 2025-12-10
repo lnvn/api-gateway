@@ -1,0 +1,20 @@
+{{- if .Values.monitoring.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "helm.fullname" . }}
+  labels:
+    {{- include "helm.labels" . | nindent 4 }}
+    # 6. Label to enable discovery by the Prometheus instance
+    release: {{ .Values.monitoring.selectorLabel }} 
+spec:
+  selector:
+    # 7. Match the labels of your application's Service
+    matchLabels:
+      {{- include "helm.selectorLabels" . | nindent 6 }}
+  endpoints:
+    # 8. Define the scrape endpoint details
+    - port: http-metrics # Matches the name used in the Service YAML (Step 2)
+      path: /metrics     # The standard metrics path in your Go application
+      interval: 30s
+{{- end }}
