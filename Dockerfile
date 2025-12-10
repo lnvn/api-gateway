@@ -19,7 +19,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o api-gateway .
 # Final Stage
 FROM alpine:latest
 
-WORKDIR /root/
+WORKDIR /app/
 
 # Copy the Pre-built binary from the previous stage
 COPY --from=builder /app/api-gateway .

@@ -6,14 +6,14 @@ replicaCount: 1
 
 image:
   repository: api-gateway
-  pullPolicy: IfNotPresent
-  # pullPolicy: Never
+  # pullPolicy: IfNotPresent
+  pullPolicy: Never
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v1"
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: ""
+fullnameOverride: "api-gateway"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -89,17 +89,20 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 # Additional volumes on the output Deployment definition.
-volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
+volumes:
+  - name: api-config
+    configMap:
+      name: api-gateway-configmap
+      items:
+      - key: config.json
+        path: config.json
 
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
+volumeMounts:
+  - name: api-config
+    mountPath: "/app/config.json"
+    subPath: config.json
+    readOnly: true
 
 nodeSelector: {}
 
