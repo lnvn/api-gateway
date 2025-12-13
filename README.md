@@ -13,5 +13,5 @@ minikube addons enable ingress
 ```
 
 <p align="center">
-  <img src="apigw.drawio.png" alt="API Gateway diagram" width="400"/>
+  <img src="apigw.png" alt="API Gateway diagram" width="400"/>
 </p>
