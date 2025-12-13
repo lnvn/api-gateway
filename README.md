@@ -12,6 +12,6 @@ helm upgrade -i prometheus oci://ghcr.io/prometheus-community/charts/kube-promet
 minikube addons enable ingress
 ```
 
-<p align="center">
+<div style="background-color: white; padding: 10px; border: 1px solid #ccc; width: 420px; margin-left: auto; margin-right: auto; display: block;">
   <img src="apigw.png" alt="API Gateway diagram" width="400"/>
-</p>
+</div>
