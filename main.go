@@ -18,13 +18,6 @@ import (
 )
 
 func main() {
-	// 1. Load Configuration
-	// For simplicity, we'll create a default config if the file doesn't exist or just hardcode for now for the first run,
-	// but let's assume a config.json exists or we create one.
-	// Let's create a sample config in memory for this step to ensure it runs without external dependencies immediately,
-	// or better, let's write a config.json file in the next step.
-
-	// For now, let's just print a message that we are starting.
 	fmt.Println("Starting API Gateway...")
 
 	// Load config
@@ -36,8 +29,14 @@ func main() {
 	// 2. Set up Routes
 	mux := http.NewServeMux()
 
-	// Health check endpoint
+	// Liveness endpoint
 	mux.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("ok"))
+	})
+
+	// Readiness endpoint
+	mux.HandleFunc("/ready", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte("ok"))
 	})
