@@ -15,6 +15,7 @@ import (
 	"api-gateway/proxy"
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"golang.org/x/time/rate"
 )
 
 func main() {
@@ -64,11 +65,19 @@ func main() {
 		fmt.Printf("Setup route: %s -> %s\n", route.Path, route.BackendURL)
 	}
 
+	limiter := middleware.NewRateLimiter(
+		middleware.RateLimitConfig{
+			RPS:   rate.Limit(10), // 10 req/sec
+			Burst: 20,
+		},
+	)
+	handler := middleware.RateLimitMiddleware(limiter)(mux)
+
 	// 3. Start Server with Graceful Shutdown
 	addr := ":" + cfg.Port
 	srv := &http.Server{
 		Addr:    addr,
-		Handler: mux,
+		Handler: handler,
 	}
 
 	// Start server in a goroutine
