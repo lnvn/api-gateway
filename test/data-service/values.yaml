@@ -67,11 +67,11 @@ resources:
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   limits:
-    cpu: 600m
-    memory: 300Mi
+    cpu: 20m
+    memory: 200Mi
   requests:
-    cpu: 500m
-    memory: 256Mi
+    cpu: 10m
+    memory: 100Mi
 
 livenessProbe:
   httpGet:
@@ -86,8 +86,8 @@ autoscaling:
   enabled: true
   minReplicas: 1
   maxReplicas: 3
-  targetCPUUtilizationPercentage: 80
-  targetMemoryUtilizationPercentage: 80
+  targetCPUUtilizationPercentage: 50
+  targetMemoryUtilizationPercentage: 50
 
 # Additional volumes on the output Deployment definition.
 volumes: []
@@ -110,6 +110,6 @@ affinity: {}
 
 monitoring:
   # 4. Global toggle to enable the ServiceMonitor resource
-  enabled: true
+  enabled: false
   # 5. Label selector used by the Prometheus Operator
   selectorLabel: prometheus

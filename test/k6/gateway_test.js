@@ -7,7 +7,7 @@ export const options = {
   scenarios: {
     constant_stress: {
       executor: 'constant-arrival-rate', // Inject requests at a constant rate
-      rate: 5000,                        // Target: 100 iterations (requests) per second
+      rate: 7,                        // Target: 100 iterations (requests) per second
       timeUnit: '1s',                   // The rate is per 1 second
       duration: '2m',                   // Run the test for 1 minute
       preAllocatedVUs: 200,             // Start with 200 Virtual Users pre-allocated

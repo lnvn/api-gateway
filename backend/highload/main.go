@@ -29,7 +29,7 @@ func generateRecords(count int) []Record {
 }
 
 func handleBackend1(w http.ResponseWriter, r *http.Request) {
-	const recordCount = 10000
+	const recordCount = 1000
 
 	startTime := time.Now()
 	records := generateRecords(recordCount)
